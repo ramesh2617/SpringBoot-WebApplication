@@ -1,13 +1,9 @@
-# You can change this base image to anything else
-# But make sure to use the correct version of Java
-FROM adoptopenjdk/openjdk11:alpine-jre
+FROM komljen/ubuntu
+MAINTAINER Ramesh <krameshchennai3456@gmail.com>
 
-# Simply the artifact path
-ARG artifact=target/spring-boot-web.jar
-
-WORKDIR /opt/app
-
-COPY ${artifact} app.jar
-
-# This should not be changed
-ENTRYPOINT ["java","-jar","app.jar"]
+RUN \
+  apt-get update && \
+  apt-get -y install \
+          apache2 && \
+  rm /var/www/html/index.html && \
+  rm -rf /var/lib/apt/lists/*
